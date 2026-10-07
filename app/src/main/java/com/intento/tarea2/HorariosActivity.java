@@ -474,14 +474,9 @@ public class HorariosActivity extends Activity {
                 "Reserva realizada con StudyClass"
         );
 
-        if (intent.resolveActivity(
-                getPackageManager()
-        ) != null) {
-
+        try {
             startActivity(intent);
-
-        } else {
-
+        } catch (Exception e) {
             Toast.makeText(
                     this,
                     "No existe aplicación de calendario",

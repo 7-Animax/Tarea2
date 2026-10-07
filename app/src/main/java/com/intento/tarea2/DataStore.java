@@ -21,21 +21,7 @@ public class DataStore {
         usuarios.add(new Usuario("usuario", "1234", "USER"));
         usuarios.add(new Usuario("useradmin", "admin123", "ADMIN"));
 
-        // Bloques horarios
-        String[] bloques = {
-            "08:00 - 10:00",
-            "10:00 - 12:00",
-            "12:00 - 14:00",
-            "14:00 - 16:00",
-            "16:00 - 18:00"
-        };
-
-        // Días
-        String[] dias = {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes"};
-
-        // Ramos: Historia, Japonés, Inglés, Matemáticas, Lenguaje, Ciencias Naturales, Programación Android
-        
-        // Población de horarios (ejemplo variado)
+        // Población inicial de horarios
         agregarHorario("Lunes", "08:00", "10:00", "Matemáticas");
         agregarHorario("Lunes", "10:00", "12:00", "Inglés");
         agregarHorario("Lunes", "14:00", "16:00", "Programación Android");

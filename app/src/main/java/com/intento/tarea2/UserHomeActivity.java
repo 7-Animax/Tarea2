@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -215,14 +214,9 @@ public class UserHomeActivity extends Activity {
     private void ejecutarIntent(
             Intent intent) {
 
-        if (intent.resolveActivity(
-                getPackageManager()
-        ) != null) {
-
+        try {
             startActivity(intent);
-
-        } else {
-
+        } catch (Exception e) {
             Toast.makeText(
                     this,
                     "No existe una aplicación compatible",

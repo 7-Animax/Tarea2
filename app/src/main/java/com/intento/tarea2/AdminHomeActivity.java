@@ -92,6 +92,12 @@ public class AdminHomeActivity extends Activity {
                 });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        actualizarEstado();
+    }
+
     private void actualizarEstado() {
 
         if (DataStore.inscripcionesAbiertas) {
