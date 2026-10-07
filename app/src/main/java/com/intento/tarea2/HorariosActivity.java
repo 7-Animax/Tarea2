@@ -140,7 +140,7 @@ public class HorariosActivity extends Activity {
                     )
             );
 
-            if (rol.equals("ADMIN")) {
+            if ("ADMIN".equals(rol)) {
 
                 fila.addView(
                         crearAccionesAdmin(

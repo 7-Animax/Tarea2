@@ -17,245 +17,107 @@ public class DataStore {
             return;
         }
 
-        // Usuario normal.
-        usuarios.add(
-                new Usuario(
-                        "usuario",
-                        "1234",
-                        "USER"
-                )
-        );
+        // Usuarios predefinidos
+        usuarios.add(new Usuario("usuario", "1234", "USER"));
+        usuarios.add(new Usuario("useradmin", "admin123", "ADMIN"));
 
-        // Administrador.
-        usuarios.add(
-                new Usuario(
-                        "useradmin",
-                        "admin123",
-                        "ADMIN"
-                )
-        );
+        // Bloques horarios
+        String[] bloques = {
+            "08:00 - 10:00",
+            "10:00 - 12:00",
+            "12:00 - 14:00",
+            "14:00 - 16:00",
+            "16:00 - 18:00"
+        };
 
-        // HORARIOS DE EJEMPLO.
+        // Días
+        String[] dias = {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes"};
 
-        horarios.add(new Horario(
-                "Lunes",
-                "08:00",
-                "10:00",
-                "Matemáticas"
-        ));
+        // Ramos: Historia, Japonés, Inglés, Matemáticas, Lenguaje, Ciencias Naturales, Programación Android
+        
+        // Población de horarios (ejemplo variado)
+        agregarHorario("Lunes", "08:00", "10:00", "Matemáticas");
+        agregarHorario("Lunes", "10:00", "12:00", "Inglés");
+        agregarHorario("Lunes", "14:00", "16:00", "Programación Android");
 
-        horarios.add(new Horario(
-                "Lunes",
-                "10:00",
-                "12:00",
-                "Inglés"
-        ));
+        agregarHorario("Martes", "08:00", "10:00", "Historia");
+        agregarHorario("Martes", "10:00", "12:00", "Japonés");
+        agregarHorario("Martes", "16:00", "18:00", "Ciencias Naturales");
 
-        horarios.add(new Horario(
-                "Lunes",
-                "14:00",
-                "16:00",
-                "Programación Android"
-        ));
+        agregarHorario("Miércoles", "08:00", "10:00", "Lenguaje");
+        agregarHorario("Miércoles", "12:00", "14:00", "Matemáticas");
+        agregarHorario("Miércoles", "16:00", "18:00", "Programación Android");
 
-        horarios.add(new Horario(
-                "Martes",
-                "08:00",
-                "10:00",
-                "Historia"
-        ));
+        agregarHorario("Jueves", "10:00", "12:00", "Inglés");
+        agregarHorario("Jueves", "14:00", "16:00", "Historia");
+        agregarHorario("Jueves", "16:00", "18:00", "Lenguaje");
 
-        horarios.add(new Horario(
-                "Martes",
-                "10:00",
-                "12:00",
-                "Japonés"
-        ));
-
-        horarios.add(new Horario(
-                "Martes",
-                "16:00",
-                "18:00",
-                "Ciencias Naturales"
-        ));
-
-        horarios.add(new Horario(
-                "Miércoles",
-                "08:00",
-                "10:00",
-                "Lenguaje"
-        ));
-
-        horarios.add(new Horario(
-                "Miércoles",
-                "12:00",
-                "14:00",
-                "Matemáticas"
-        ));
-
-        horarios.add(new Horario(
-                "Miércoles",
-                "16:00",
-                "18:00",
-                "Programación Android"
-        ));
-
-        horarios.add(new Horario(
-                "Jueves",
-                "08:00",
-                "10:00",
-                "Inglés"
-        ));
-
-        horarios.add(new Horario(
-                "Jueves",
-                "14:00",
-                "16:00",
-                "Historia"
-        ));
-
-        horarios.add(new Horario(
-                "Viernes",
-                "08:00",
-                "10:00",
-                "Japonés"
-        ));
-
-        horarios.add(new Horario(
-                "Viernes",
-                "12:00",
-                "14:00",
-                "Ciencias Naturales"
-        ));
-
-        horarios.add(new Horario(
-                "Viernes",
-                "16:00",
-                "18:00",
-                "Programación Android"
-        ));
+        agregarHorario("Viernes", "08:00", "10:00", "Japonés");
+        agregarHorario("Viernes", "12:00", "14:00", "Ciencias Naturales");
+        agregarHorario("Viernes", "14:00", "16:00", "Programación Android");
 
         datosInicializados = true;
     }
 
-    public static synchronized Usuario autenticar(
-            String username,
-            String password) {
+    private static void agregarHorario(String dia, String inicio, String fin, String ramo) {
+        horarios.add(new Horario(dia, inicio, fin, ramo));
+    }
 
-        for (Usuario usuario : usuarios) {
-
-            if (usuario.getUsername().equalsIgnoreCase(username)
-                    && usuario.getPassword().equals(password)) {
-
-                return usuario;
+    public static synchronized Usuario autenticar(String username, String password) {
+        for (Usuario u : usuarios) {
+            if (u.getUsername().equalsIgnoreCase(username) && u.getPassword().equals(password)) {
+                return u;
             }
         }
-
         return null;
     }
 
-    public static synchronized String registrarUsuario(
-            String username,
-            String password) {
-
-        if (username == null || username.trim().isEmpty()) {
-            return "Debes ingresar un usuario";
+    public static synchronized String registrarUsuario(String username, String password) {
+        if (username == null || username.trim().isEmpty()) return "Usuario vacío";
+        if (password == null || password.trim().isEmpty()) return "Contraseña vacía";
+        if (username.equalsIgnoreCase("useradmin")) return "Nombre reservado";
+        
+        for (Usuario u : usuarios) {
+            if (u.getUsername().equalsIgnoreCase(username)) return "Usuario ya existe";
         }
-
-        if (password == null || password.trim().isEmpty()) {
-            return "Debes ingresar una contraseña";
-        }
-
-        if (username.equalsIgnoreCase("useradmin")) {
-            return "Ese nombre está reservado";
-        }
-
-        for (Usuario usuario : usuarios) {
-
-            if (usuario.getUsername()
-                    .equalsIgnoreCase(username)) {
-
-                return "El usuario ya existe";
-            }
-        }
-
-        usuarios.add(
-                new Usuario(
-                        username,
-                        password,
-                        "USER"
-                )
-        );
-
+        
+        usuarios.add(new Usuario(username, password, "USER"));
         return null;
     }
 
-    public static synchronized String reservar(
-            Horario horario,
-            String username) {
+    public static synchronized String reservar(Horario horario, String username) {
+        if (!inscripcionesAbiertas) return "Inscripciones cerradas";
+        if (!horario.isHabilitado()) return "Horario deshabilitado";
+        if (horario.estaReservado()) return "Ya reservado";
 
-        if (!inscripcionesAbiertas) {
-            return "Las inscripciones están cerradas";
-        }
-
-        if (!horario.isHabilitado()) {
-            return "Este horario no está disponible";
-        }
-
-        if (horario.estaReservado()) {
-            return "Este horario ya está reservado";
-        }
-
-        // Evita dos reservas en el mismo bloque horario.
+        // Mismo día y bloque
         for (Horario h : horarios) {
-
-            if (username.equals(h.getReservadoPor())
-                    && h.getDia().equals(horario.getDia())
-                    && h.getHoraInicio().equals(
-                    horario.getHoraInicio())) {
-
-                return "Ya tienes otra clase en ese horario";
+            if (username.equals(h.getReservadoPor()) && 
+                h.getDia().equals(horario.getDia()) && 
+                h.getHoraInicio().equals(horario.getHoraInicio())) {
+                return "Ya tienes una clase en este bloque";
             }
         }
 
         horario.setReservadoPor(username);
-
         return null;
     }
 
-    public static synchronized boolean cancelarReservaUsuario(
-            Horario horario,
-            String username) {
-
-        if (horario.getReservadoPor() != null
-                && horario.getReservadoPor()
-                .equals(username)) {
-
+    public static synchronized void cancelarReservaUsuario(Horario horario, String username) {
+        if (username.equals(horario.getReservadoPor())) {
             horario.setReservadoPor(null);
-
-            return true;
         }
-
-        return false;
     }
 
-    public static synchronized void cancelarReservaAdmin(
-            Horario horario) {
-
+    public static synchronized void cancelarReservaAdmin(Horario horario) {
         horario.setReservadoPor(null);
     }
 
-    public static synchronized void cambiarDisponibilidad(
-            Horario horario) {
-
-        horario.setHabilitado(
-                !horario.isHabilitado()
-        );
+    public static synchronized void cambiarDisponibilidad(Horario horario) {
+        horario.setHabilitado(!horario.isHabilitado());
     }
 
-    public static synchronized ArrayList<Horario>
-    obtenerHorarios() {
-
+    public static synchronized ArrayList<Horario> obtenerHorarios() {
         return new ArrayList<>(horarios);
     }
 }

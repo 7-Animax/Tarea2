@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class AdminHomeActivity extends Activity {
+public class AdminHome extends Activity {
 
     private String username;
     private TextView txtEstado;
@@ -69,7 +69,7 @@ public class AdminHomeActivity extends Activity {
 
                     /*
                      * INTENT EXPLÍCITO 3
-                     * AdminHomeActivity -> HorariosActivity
+                     * Home -> HorariosActivity
                      */
 
                     Intent intent =

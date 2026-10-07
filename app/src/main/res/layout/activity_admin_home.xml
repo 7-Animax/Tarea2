@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#F4F7FB">
+
+    <TextView
+        android:id="@+id/txtAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="👨‍💼 Panel Administrador"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="#243B53"/>
+
+    <TextView
+        android:id="@+id/txtEstado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="✅ Inscripciones abiertas"
+        android:textSize="18sp"
+        android:textColor="#2E7D32"
+        android:layout_marginTop="30dp"/>
+
+    <Button
+        android:id="@+id/btnInscripciones"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="🔒 Cerrar inscripciones"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btnGestionar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="📅 GESTIONAR HORARIOS"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#345995"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>

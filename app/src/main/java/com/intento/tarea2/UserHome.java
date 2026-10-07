@@ -4,12 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class UserHomeActivity extends Activity {
+public class UserHome extends Activity {
 
     private String username;
     private String rol;
@@ -102,7 +101,7 @@ public class UserHomeActivity extends Activity {
 
         /*
          * INTENT EXPLÍCITO 3
-         * UserHomeActivity -> HorariosActivity
+         * UserHome -> HorariosActivity
          */
 
         Intent intent =
